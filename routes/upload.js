@@ -4,6 +4,7 @@ const multer = require('multer');
 const XLSX = require('xlsx');
 const { verifyToken } = require('../middleware/auth');
 const Upload = require('../models/Upload');
+const uploadController = require('../controllers/uploadController'); // ✅ Import this
 
 // Memory storage for multer
 const storage = multer.memoryStorage();
@@ -48,10 +49,10 @@ router.get('/', verifyToken, async (req, res) => {
     }
 });
 
-// GET /api/upload/:id — Get one file by ID
+// GET /api/upload/:id — Get one file by ID (with user info)
 router.get('/:id', verifyToken, async (req, res) => {
     try {
-        const file = await Upload.findById(req.params.id);
+        const file = await Upload.findById(req.params.id).populate('userId', 'email'); // 👈 add user email
         if (!file) return res.status(404).json({ message: "File not found" });
         res.json(file);
     } catch (err) {
@@ -69,5 +70,8 @@ router.delete('/:id', verifyToken, async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+
+// PUT /api/upload/chart/:id — Save chart customization options
+router.put('/chart/:id', verifyToken, uploadController.saveChartOptions); // ✅ Fixed line
 
 module.exports = router;
