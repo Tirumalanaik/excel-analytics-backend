@@ -1,0 +1,7 @@
+{
+  "appName": "Excel ",
+  "uploadLimitMB": 2,
+  "enable2FA": true,
+  "maintenanceMode": true,
+  "theme": "dark"
+}
