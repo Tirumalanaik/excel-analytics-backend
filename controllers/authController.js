@@ -7,10 +7,7 @@ exports.register = async (req, res) => {
     const { name, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-
     try {
-       
-
         const user = new User({
             name,
             email,
@@ -42,7 +39,12 @@ exports.login = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        res.json({ token, role: user.role });
+        // ✅ Return full name along with token and role
+        res.json({
+            token,
+            role: user.role,
+            name: user.name   // ✅ Send full name to frontend
+        });
     } catch (err) {
         res.status(500).json({ error: 'Server Error' });
     }

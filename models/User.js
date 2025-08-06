@@ -1,5 +1,4 @@
-// models/User.js
-const mongoose = require('mongoose');
+﻿const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -13,6 +12,8 @@ const userSchema = new mongoose.Schema({
         enabled: { type: Boolean, default: false },
         secret: String
     }
+}, {
+    timestamps: true // ✅ Adds createdAt and updatedAt automatically
 });
 
 module.exports = mongoose.model('User', userSchema);
