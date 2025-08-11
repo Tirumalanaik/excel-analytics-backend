@@ -8,7 +8,7 @@ router.use((req, res, next) => {
 });
 
 
-const upload = require('../middleware/Upload'); // <-- your new file
+const upload = require('../middleware/Upload');
 
 const {
     getProfile,

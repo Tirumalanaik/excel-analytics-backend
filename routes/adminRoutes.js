@@ -3,14 +3,14 @@ const router = express.Router();
 const { verifyToken } = require('../middleware/auth');
 const { verifyAdmin } = require('../middleware/admin');
 const adminController = require('../controllers/adminController');
-const User = require('../models/User'); // ✅ Add this if not already
+const User = require('../models/User');
 
 router.get('/users', verifyToken, verifyAdmin, adminController.getAllUsers);
 router.get('/uploads', verifyToken, verifyAdmin, adminController.getAllUploads);
-router.get('/charts', verifyToken, verifyAdmin, adminController.getAllCharts); // optional
+router.get('/charts', verifyToken, verifyAdmin, adminController.getAllCharts); 
 router.get('/stats', verifyToken, verifyAdmin, adminController.getStats);
 
-// ✅ NEW: Admin Profile Route
+
 router.get('/profile', verifyToken, verifyAdmin, async (req, res) => {
     try {
         const user = await User.findOne({ email: req.user.email }).select('-password');

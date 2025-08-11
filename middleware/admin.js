@@ -5,7 +5,7 @@ const verifyAdmin = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
-    // ✅ Only log in development mode
+    //Only log in development mode
     if (process.env.NODE_ENV === 'development') {
         console.log('🔐 Admin Middleware - Token:', token);
     }
@@ -17,7 +17,7 @@ const verifyAdmin = async (req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // ✅ Only log in development mode
+        
         if (process.env.NODE_ENV === 'development') {
             console.log('✅ Admin Middleware - Decoded Token:', decoded);
         }

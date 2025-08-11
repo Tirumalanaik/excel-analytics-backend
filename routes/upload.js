@@ -4,13 +4,13 @@ const multer = require('multer');
 const XLSX = require('xlsx');
 const { verifyToken } = require('../middleware/auth');
 const Upload = require('../models/Upload');
-const uploadController = require('../controllers/uploadController'); // ✅ Import this
+const uploadController = require('../controllers/uploadController'); 
 
 // Memory storage for multer
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// POST /api/upload — Upload a file
+// POST api Upload a file
 router.post('/', verifyToken, upload.single('file'), async (req, res) => {
     try {
         if (!req.file) {
@@ -38,7 +38,7 @@ router.post('/', verifyToken, upload.single('file'), async (req, res) => {
     }
 });
 
-// GET /api/upload — Get all uploads for the logged-in user
+// Get all uploads for the logged-in user
 router.get('/', verifyToken, async (req, res) => {
     try {
         const uploads = await Upload.find({ userId: req.user.id }).sort({ createdAt: -1 });
@@ -49,18 +49,17 @@ router.get('/', verifyToken, async (req, res) => {
     }
 });
 
-// GET /api/upload/:id — Get one file by ID (with user info)
+// Get one file by ID 
 router.get('/:id', verifyToken, async (req, res) => {
     try {
-        const file = await Upload.findById(req.params.id).populate('userId', 'email'); // 👈 add user email
+        const file = await Upload.findById(req.params.id).populate('userId', 'email'); 
         if (!file) return res.status(404).json({ message: "File not found" });
         res.json(file);
     } catch (err) {
         res.status(500).json({ message: "Server error" });
     }
 });
-
-// DELETE /api/upload/:id — Delete a file by ID
+// Delete a file by ID
 router.delete('/:id', verifyToken, async (req, res) => {
     try {
         const deletedFile = await Upload.findByIdAndDelete(req.params.id);
@@ -71,7 +70,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
     }
 });
 
-// PUT /api/upload/chart/:id — Save chart customization options
-router.put('/chart/:id', verifyToken, uploadController.saveChartOptions); // ✅ Fixed line
+// Save chart customization options
+router.put('/chart/:id', verifyToken, uploadController.saveChartOptions); 
 
 module.exports = router;

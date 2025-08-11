@@ -2,14 +2,14 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const User = require('../models/User'); // ✅ MongoDB User model
+const User = require('../models/User'); 
 const { register, login } = require('../controllers/authController');
 
-// --- Local login/register ---
+// login in local
 router.post('/register', register);
 router.post('/login', login);
 
-// --- Google OAuth ---
+//Google auth
 router.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email'],
     prompt: 'select_account'
@@ -45,7 +45,7 @@ router.get('/google/callback',
 );
 
 
-// --- GitHub OAuth ---
+// github auth
 router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
 
 router.get('/github/callback',

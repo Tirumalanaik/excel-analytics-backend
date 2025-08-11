@@ -4,16 +4,16 @@ exports.sendEmail = async (req, res) => {
   const { to, subject, body } = req.body;
 
   try {
-    // Configure transporter
+    
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,     // your Gmail address
-        pass: process.env.EMAIL_PASS      // your Gmail app password
+        user: process.env.EMAIL_USER,     
+        pass: process.env.EMAIL_PASS      
       }
     });
 
-    // Email options
+    
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to,
@@ -21,7 +21,7 @@ exports.sendEmail = async (req, res) => {
       text: body
     };
 
-    // Send mail
+    
     const info = await transporter.sendMail(mailOptions);
 
     res.json({ message: '? Email sent', info });

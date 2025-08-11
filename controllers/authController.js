@@ -2,7 +2,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Register API
+//Register API
 exports.register = async (req, res) => {
     const { name, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -22,7 +22,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login API
+//Login API
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -39,11 +39,11 @@ exports.login = async (req, res) => {
             { expiresIn: '1h' }
         );
 
-        // ✅ Return full name along with token and role
+       
         res.json({
             token,
             role: user.role,
-            name: user.name   // ✅ Send full name to frontend
+            name: user.name   
         });
     } catch (err) {
         res.status(500).json({ error: 'Server Error' });

@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 
-// Replace with your actual Gmail app password
+// Replace with actual Gmail app password
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

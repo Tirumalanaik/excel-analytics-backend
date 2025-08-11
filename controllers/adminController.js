@@ -2,7 +2,7 @@
 const Upload = require('../models/Upload');
 
 exports.getAllUsers = async (req, res) => {
-    const users = await User.find().select('-password'); // hide password
+    const users = await User.find().select('-password'); // to hide the pwd
     res.json(users);
 };
 
@@ -14,7 +14,7 @@ exports.getAllUploads = async (req, res) => {
 exports.getAllCharts = async (req, res) => {
     try {
         const charts = await Upload.find()
-            .populate('userId', 'email') // 👈 includes user email
+            .populate('userId', 'email') 
             .sort({ createdAt: -1 });
         res.json(charts);
     } catch (err) {

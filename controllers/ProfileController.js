@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
-// GET /api/profile
+// GET /profile
 exports.getProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
@@ -12,7 +12,7 @@ exports.getProfile = async (req, res) => {
     }
 };
 
-// PUT /api/profile
+// PUT /profile
 exports.updateProfile = async (req, res) => {
     try {
         const updates = {
@@ -31,7 +31,7 @@ exports.updateProfile = async (req, res) => {
     }
 };
 
-// PUT /api/profile/password
+// PUT /password
 exports.changePassword = async (req, res) => {
     const { currentPassword, newPassword } = req.body;
 
@@ -50,6 +50,6 @@ exports.changePassword = async (req, res) => {
     }
 };
 
-// 2FA functions can be placeholders unless you're implementing real 2FA
+// 2FA functions not working properly had to some adjustments.................
 exports.enable2FA = (req, res) => res.json({ message: '2FA Enabled (mock)' });
 exports.disable2FA = (req, res) => res.json({ message: '2FA Disabled (mock)' });

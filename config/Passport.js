@@ -5,7 +5,7 @@ const GitHubStrategy = require('passport-github2').Strategy;
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-// Google
+// For google login
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -14,7 +14,7 @@ passport.use(new GoogleStrategy({
     return done(null, profile);
 }));
 
-// GitHub
+// For github login
 passport.use(new GitHubStrategy({
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
         secret: String
     }
 }, {
-    timestamps: true // ✅ Adds createdAt and updatedAt automatically
+    timestamps: true 
 });
 
 module.exports = mongoose.model('User', userSchema);
